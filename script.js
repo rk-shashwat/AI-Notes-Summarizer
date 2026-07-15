@@ -102,52 +102,24 @@ ${notes}`;
 // CORE: Call the Groq API and return the summary text
 // ------------------------------------------------------------
 async function fetchSummary(prompt) {
-  let response;
 
-  try {
-    response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-     body: JSON.stringify({
-    prompt: prompt
-})
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            prompt: prompt
+        })
     });
-  } catch (networkError) {
-    // fetch() throws a TypeError when there's no internet connection
-    // or the request otherwise never reaches the server
-    throw new Error("No internet connection. Please check your network and try again.");
-  }
 
-  // ---- Handle HTTP-level errors ----
-  if (!response.ok) {
-    if (response.status === 401) {
-      throw new Error("Invalid API key. Please check your Groq API key and try again.");
+    if (!response.ok) {
+        throw new Error(`Server Error: ${response.status}`);
     }
-    if (response.status === 429) {
-      throw new Error("Rate limit reached. Please wait a moment and try again.");
-    }
-    if (response.status >= 500) {
-      throw new Error("The AI server is having issues right now. Please try again shortly.");
-    }
-    throw new Error(`Something went wrong (error ${response.status}). Please try again.`);
-  }
 
-  let data;
-  try {
-    data = await response.json();
-  } catch (parseError) {
-    throw new Error("Received an unreadable response from the server. Please try again.");
-  }
+    const data = await response.json();
 
-  const summary = data?.choices?.[0]?.message?.content?.trim();
-
-  if (!summary) {
-    throw new Error("The AI didn't return a summary. Please try again.");
-  }
-
-  return summary;
+    return data.response;
 }
 
 // ------------------------------------------------------------
