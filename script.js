@@ -11,10 +11,7 @@
 // This is fine for local/personal use, but for a public
 // deployment, route this request through your own backend
 // instead so the key never reaches the browser.
-const API_KEY = "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";
-const API_URL = "https://api.groq.com/openai/v1/chat/completions";
-const MODEL = "llama-3.3-70b-versatile";
-
+const API_URL = "https://ai-tool-backend-dr0k.onrender.com";
 // ------------------------------------------------------------
 // DOM REFERENCES
 // ------------------------------------------------------------
