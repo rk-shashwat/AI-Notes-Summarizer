@@ -110,11 +110,9 @@ async function fetchSummary(prompt) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: [{ role: "user", content: prompt }],
-        temperature: 0.5
-      })
+     body: JSON.stringify({
+    prompt: prompt
+})
     });
   } catch (networkError) {
     // fetch() throws a TypeError when there's no internet connection
