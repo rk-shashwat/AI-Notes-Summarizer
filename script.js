@@ -11,7 +11,7 @@
 // This is fine for local/personal use, but for a public
 // deployment, route this request through your own backend
 // instead so the key never reaches the browser.
-const API_URL = "https://ai-tool-backend-dr0k.onrender.com";
+const API_URL = "https://ai-quiz-generator-1fi9.onrender.com";
 // ------------------------------------------------------------
 // DOM REFERENCES
 // ------------------------------------------------------------
